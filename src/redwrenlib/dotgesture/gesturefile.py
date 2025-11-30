@@ -8,7 +8,7 @@ from typing import Any, List, Optional
 
 from sklearn.mixture import GaussianMixture
 
-from ..utils.errors import print_error
+from ..utils.debug import alert
 from ..typing import (
     ModelParameters,
     data_dict_t,
@@ -49,7 +49,7 @@ class GestureFile:
                 nathan.dump(self.parameters, f)
 
         except Exception as e:
-            print_error(f"Unable to create file: {e}")
+            alert(f"Unable to create file: {e}")
             return False
 
         return True
@@ -61,7 +61,7 @@ class GestureFile:
                 nathan.dump((label, models), f)
 
         except Exception as e:
-            print_error(f"Unable to append readings: {e}")
+            alert(f"Unable to append readings: {e}")
             return False
 
         return True
@@ -97,7 +97,6 @@ class GestureFile:
                         break
 
         except Exception as e:
-            print_error(f"Invalid Gesture File. {e}")
             return False
 
         return True
