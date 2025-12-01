@@ -22,6 +22,7 @@ class GestureFile:
 
     # Initialise the instance with default values
     def __init__(self, filename: str):
+        """Initialise the GestureFile instance with the given filename."""
         self.__filename: str = filename
         self.__models: data_dict_t = {}
 
@@ -33,6 +34,11 @@ class GestureFile:
 
     # Create mew gesture file
     def create(self) -> bool:
+        """Create a new gesture file and save initial parameters.
+
+        Returns:
+            bool: True if the file was created successfully, False if there was an error.
+        """
         try:
             with h5py.File(self.__filename, 'w') as f:
                 f.create_dataset('version', data=GESTURE_VERSION)
@@ -49,6 +55,11 @@ class GestureFile:
 
     # Add models for a sensor to the file
     def append_reading(self, label: str, models: List[GaussianMixture]) -> bool:
+        """Add models for a sensor to the gesture file with the specified label.
+
+        Returns:
+            bool: True if the models were appended successfully, False if there was an error.
+        """
         try:
             with h5py.File(self.__filename, 'a') as f:
                 gmm_group = f.create_group(label) # create a new group for each sensor
@@ -70,6 +81,11 @@ class GestureFile:
 
     # Read the gesture file; deserialise it
     def read(self) -> bool:
+        """Read and deserialise the gesture file, updating internal model parameters.
+
+        Returns:
+            bool: True if the file was read successfully, False if there was an error.
+        """
         try:
             with h5py.File(self.__filename, 'r') as f:
                 file_version = f['version'][()].decode('utf-8')
@@ -94,11 +110,22 @@ class GestureFile:
     #- Getters & Setters ---------------------------------------------------------------------------
 
     # Get models read from/written to the gesture file
-    def get_models(self) -> data_dict_t: return self.__models
+    def get_models(self) -> data_dict_t:
+        """Return the models read from or written to the gesture file.
+
+        Returns:
+            data_dict_t: The models associated with the gesture file.
+        """
+        return self.__models
 
 
     # Get saved parameters in ModelParameters type
     def get_parameters(self) -> ModelParameters:
+        """Return the saved parameters as a ModelParameters instance.
+
+        Returns:
+            ModelParameters: The parameters associated with the gesture file.
+        """
         return ModelParameters(
                 random_state=self.__random_state,
                 threshold=self.__threshold,
@@ -113,6 +140,14 @@ class GestureFile:
             random_state: Optional[int]=None,
             threshold:Optional[float]=None
         ) -> None:
+        """Set parameters, either overriding individual values or all at once using a ModelParameters instance.
+
+        Parameters:
+            parameters (Optional[ModelParameters]): Parameters to apply.
+            n_components (Optional[int]): Number of components to set.
+            random_state (Optional[int]): Random state to set.
+            threshold (Optional[float]): Threshold value to set.
+        """
         if parameters is not None:
             self.__threshold = parameters.threshold
             assert parameters.n_components > 0, "n_components should be above 0"

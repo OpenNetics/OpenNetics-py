@@ -14,7 +14,8 @@ from ...typing import (
     data_dict_t,
 )
 
-#- Read Metho --------------------------------------------------------------------------------------
+
+#- Read Method -------------------------------------------------------------------------------------
 
 def read_file(f: h5py.File) -> Tuple[ModelParameters, data_dict_t]:
     try:
