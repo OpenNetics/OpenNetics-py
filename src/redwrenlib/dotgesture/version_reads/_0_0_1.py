@@ -4,7 +4,7 @@
 #- Imports -----------------------------------------------------------------------------------------
 
 import h5py
-from typing import Any, List, Optional, Tuple
+from typing import Tuple
 
 from sklearn.mixture import GaussianMixture
 
@@ -27,10 +27,10 @@ def read_file(f: h5py.File) -> Tuple[ModelParameters, data_dict_t]:
         )
 
         for name in f.keys():
-            models_dict[name] = []
             gmm_group = f[name]
 
             if isinstance(gmm_group, h5py.Group):
+                models_dict[name] = []
                 for model_name in gmm_group.keys():
                     model_group = gmm_group[model_name]
 
