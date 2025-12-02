@@ -20,13 +20,14 @@ init()
 #- Public Methods ----------------------------------------------------------------------------------
 
 # Print where this procedure was called, with optional message.
-def alert(prompt: str = "") -> None:
+def alert(prompt: str = "", backtrack: int = 1, level: str = "alert") -> None:
     # Immediate caller frame.
-    # 0 is this function, 1 is what called it
+    # 0 is this function, 1 is what called it.
+    # backtrack = 2, is the code block that called the function that called alert()
 
     stack = inspect.stack()
-    if len(stack) > 2:
-        caller = stack[1]
+    if len(stack) > (backtrack+1):
+        caller = stack[backtrack]
         caller_file = os.path.abspath(caller.filename)
         caller_line = caller.lineno
 
@@ -60,6 +61,6 @@ def alert(prompt: str = "") -> None:
 
     else:
         caller_info: str = Fore.YELLOW + "<unknown>" + Fore.RESET
-    
-    print(Fore.RED + f"[Error] {caller_info} {prompt}", file=sys.stderr)
+
+    print(Fore.RED + f"[{level}] {caller_info} {prompt}", file=sys.stderr)
 
