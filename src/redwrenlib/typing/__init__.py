@@ -8,7 +8,7 @@ from .aliases import (
 )
 
 from .gestures import (
-    ModelParameters,
+    ModelParameters, GestureMatch
 )
 
 
@@ -16,6 +16,6 @@ from .gestures import (
 
 __all__ = [
     "float2d_t", "float3d_t", "int2d_t", "data_dict_t",
-    "ModelParameters",
+    "ModelParameters", "GestureMatch",
 ]
 

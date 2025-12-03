@@ -4,14 +4,15 @@
 #- Imports -----------------------------------------------------------------------------------------
 
 import h5py
-from typing import List, Optional
+from typing import Dict, List, Optional, Tuple
 
+import numpy as np
 from sklearn.mixture import GaussianMixture
 
 from .version_reads import version_readers, GESTURE_VERSION
 from ..utils.debug import alert
 from ..typing import (
-    ModelParameters,
+    ModelParameters, GestureMatch,
     data_dict_t,
 )
 
@@ -105,6 +106,40 @@ class GestureFile:
             return False
 
         return True
+
+
+    # Check if the readings trigger the gesture
+    def is_gesture(self,
+        timestamps: List[float] = [],
+        readings: Dict[str, List[float]] = {}
+    ) -> Tuple[bool, Dict[str, GestureMatch]]:
+        """
+        """
+        Result: Dict[str, GestureMatch] = {}
+
+        if self.__models == {}:
+            # print line where .is_gesture() was called
+            alert("Models aren't generated. Read a file.", backtrack=2)
+            return False, Result
+
+        for sensor in readings.keys():
+            if len(timestamps) != len(readings[sensor]):
+                # print line where .is_gesture() was called
+                alert("timestamps and readings should be of the same size.", backtrack=2)
+                return False, Result
+
+            values2d = np.array([[x, y] for x, y in zip(timestamps, readings[sensor])])
+
+            # Compute average log‑likelihood for each model
+            # .score = mean log‑likelihood
+            scores = [float(model.score(values2d)) for model in self.__models[sensor]]
+
+            Result[sensor] = GestureMatch(
+                value = max(scores), # would help with finding more appropriate threshold
+                status = max(scores) > self.__threshold # best‑matching orientation
+            )
+
+        return all(r.status for r in Result.values()), Result
 
 
     #- Getters & Setters ---------------------------------------------------------------------------
