@@ -114,6 +114,20 @@ class GestureFile:
         readings: Dict[str, List[float]] = {}
     ) -> Tuple[bool, Dict[str, GestureMatch]]:
         """
+        """Check whether the provided readings trigger any gestures based on the loaded models.
+
+        Args:
+            timestamps: A list of timestamps corresponding to the sensor readings.
+            readings: A dictionary of keys with sensor labels and values of lists of readings.
+
+        Returns:
+            Tuple[bool, Dict[str, GestureMatch]]: A tuple containing:
+                - A boolean indicating if the gesture is a match.
+                - A dictionary where keys are sensor labels and values are GestureMatch instances,
+                  informing which sensors didn't make the cut (with their score).
+
+        Raises:
+            Alert: If the models are not generated or if the lengths of timestamps and readings do not match.
         """
         Result: Dict[str, GestureMatch] = {}
 
@@ -178,10 +192,10 @@ class GestureFile:
         """Set parameters, either overriding individual values or all at once using a ModelParameters instance.
 
         Parameters:
-            parameters (Optional[ModelParameters]): Parameters to apply.
-            n_components (Optional[int]): Number of components to set.
-            random_state (Optional[int]): Random state to set.
-            threshold (Optional[float]): Threshold value to set.
+            parameters: Parameters to apply.
+            n_components: Number of components to set.
+            random_state: Random state to set.
+            threshold: Threshold value to set.
         """
         if parameters is not None:
             self.__threshold = parameters.threshold
