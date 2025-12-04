@@ -3,15 +3,17 @@
 
 #- Imports -----------------------------------------------------------------------------------------
 
-from ._0_0_1 import read_file as read_0_0_1
+from .v1 import read_file as v1
+from .v2 import read_file as v2
 
 
 #- Export ------------------------------------------------------------------------------------------
 
-GESTURE_VERSION: str = "0.0.1"
+GESTURE_VERSION: str = "2"
 
 version_readers = {
-    "0.0.1": read_0_0_1,
+    "0.0.1": v1,
+    "2": v2,
 }
 
 __all__ = [

@@ -3,23 +3,30 @@
 
 #- Imports -----------------------------------------------------------------------------------------
 
+from typing import List
 from dataclasses import dataclass
 
-from numpy import bool as npbool
-from numpy import float64 as npfloat
+from sklearn.mixture import GaussianMixture
 
 
 #- Data Classes ------------------------------------------------------------------------------------
 
-# Immutable container for model configuration and inputs used when creating gestures.
-@dataclass(frozen=True)
-class ModelParameters:
-    random_state: int
-    n_components: int
-    threshold: float
+# Mutable container for model configuration and inputs used when creating gestures.
+class SensorData:
+    models: List[GaussianMixture] = []
+    threshold:  float = -10.5
+    random_state: int = 2
+    n_components: int = 42
 
+
+# Immutable container for gesture checker
 @dataclass(frozen=True)
 class GestureMatch:
-    value: npfloat
-    status: npbool
+    value: float
+    status: bool
+
+
+#- Aliases -----------------------------------------------------------------------------------------
+
+data_dict_t = dict[str, SensorData]
 
