@@ -10,6 +10,7 @@ from sklearn.mixture import GaussianMixture
 
 from ..utils import defaults
 
+
 #- Data Classes ------------------------------------------------------------------------------------
 
 # Mutable container for model configuration and inputs used when creating gestures.

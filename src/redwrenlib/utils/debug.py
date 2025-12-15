@@ -6,21 +6,27 @@
 import os
 import sys
 import inspect
+from enum import Enum
 from typing import Any, Optional
 
 from colorama import init, Fore
 
 
-#- Private Methods ---------------------------------------------------------------------------------
+#- Private Defines ---------------------------------------------------------------------------------
 
 # Initialise colorama
 init()
+
+class AlertLevel(Enum):
+    ALERT = "alert"
+    WARNING = "warning"
+    ERROR = "error"
 
 
 #- Public Methods ----------------------------------------------------------------------------------
 
 # Print where this procedure was called, with optional message.
-def alert(prompt: Any = "", backtrack: int = 1, level: str = "alert") -> None:
+def alert(prompt: Any = "", backtrack: int = 1, level: AlertLevel = AlertLevel.ALERT) -> None:
     # Immediate caller frame.
     # 0 is this function, 1 is what called it.
     # backtrack = 2, is the code block that called the function that called alert()
