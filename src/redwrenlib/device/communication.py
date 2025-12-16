@@ -3,7 +3,7 @@
 
 #- Imports -----------------------------------------------------------------------------------------
 
-from typing import List
+from typing import Any
 
 from ..typing import numeric_t
 from ..utils.debug import alert, AlertLevel
@@ -11,11 +11,18 @@ from ..utils.debug import alert, AlertLevel
 
 #- Public Calls ------------------------------------------------------------------------------------
 
-def get_data() -> List[numeric_t]:
-    Result: List[numeric_t] = []
+# placeholder: implement device connection
+def connect(username: str, password:str) -> bool:
+    return True
+
+
+# placeholder: implement to get data from the source and return as numeric str
+def get_data() -> list[numeric_t]:
+    Result: list[numeric_t] = []
     return Result
 
 
+# placeholder: implement to send data to the device. Add more args to specify device n stuff
 def send_data(data: Any) -> None:
     # if fail
     try:

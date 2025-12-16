@@ -3,13 +3,13 @@
 
 #- Imports -----------------------------------------------------------------------------------------
 
-from typing import List, Union
+from typing import Union
 
 
 #- Aliases -----------------------------------------------------------------------------------------
 
-float2d_t = List[List[float]]
-float3d_t = List[List[List[float]]]
-int2d_t   = List[List[int]]
+float2d_t = list[list[float]]
+float3d_t = list[list[list[float]]]
+int2d_t   = list[list[int]]
 numeric_t = Union[float, int]
 

@@ -27,6 +27,10 @@ class AlertLevel(Enum):
 
 # Print where this procedure was called, with optional message.
 def alert(prompt: Any = "", backtrack: int = 1, level: AlertLevel = AlertLevel.ALERT) -> None:
+    #========================================
+    # get caller info
+    #========================================
+
     # Immediate caller frame.
     # 0 is this function, 1 is what called it.
     # backtrack = 2, is the code block that called the function that called alert()
@@ -68,5 +72,8 @@ def alert(prompt: Any = "", backtrack: int = 1, level: AlertLevel = AlertLevel.A
     else:
         caller_info: str = Fore.YELLOW + "<unknown>" + Fore.RESET
 
+    #========================================
+    # print alert
+    #========================================
     print(Fore.RED + f"[{level}] {caller_info} {prompt}", file=sys.stderr)
 

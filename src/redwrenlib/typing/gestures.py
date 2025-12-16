@@ -3,7 +3,6 @@
 
 #- Imports -----------------------------------------------------------------------------------------
 
-from typing import List
 from dataclasses import dataclass
 
 from sklearn.mixture import GaussianMixture
@@ -15,7 +14,7 @@ from ..utils import defaults
 
 # Mutable container for model configuration and inputs used when creating gestures.
 class SensorData:
-    models: List[GaussianMixture] = []
+    models: list[GaussianMixture] = []
     threshold:  float = defaults.MODEL_THRESHOLD
     random_state: int = defaults.MODEL_RANDOM_STATE
     n_components: int = defaults.MODEL_N_COMPONENTS
