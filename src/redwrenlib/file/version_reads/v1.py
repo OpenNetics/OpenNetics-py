@@ -4,7 +4,6 @@
 #- Imports -----------------------------------------------------------------------------------------
 
 import h5py
-from typing import Tuple
 
 from sklearn.mixture import GaussianMixture
 
@@ -13,6 +12,7 @@ from ...typing import (
     data_dict_t, SensorData
 )
 
+IGNORE_ERROR: str = "Field names only allowed for compound types"
 
 #- Read Method -------------------------------------------------------------------------------------
 
@@ -20,25 +20,20 @@ def read_file(f: h5py.File) -> data_dict_t:
     try:
         models_dict: data_dict_t = {}
 
-        threshold=float(f['threshold'][()])
-        n_components=int(f['n_components'][()])
-        random_state=int(f['random_state'][()])
-
         for name in f.keys():
             gmm_group = f[name]
 
             if isinstance(gmm_group, h5py.Group):
                 models_dict[name] = SensorData()
 
-                # version 1 had common parameters for all sensor models
-                models_dict[name].threshold = threshold
-                models_dict[name].n_components = n_components
-                models_dict[name].random_state = random_state
+                models_dict[name].threshold = float(gmm_group['threshold'][()])
+                models_dict[name].n_components = int(gmm_group['n_components'][()])
+                models_dict[name].random_state = int(gmm_group['random_state'][()])
 
                 for model_name in gmm_group.keys():
                     model_group = gmm_group[model_name]
-
                     model_instance = GaussianMixture()
+
                     model_instance.n_components = model_group['n_components'][()]
                     model_instance.weights_ = model_group['weights'][()]
                     model_instance.means_ = model_group['means'][()]
@@ -48,6 +43,6 @@ def read_file(f: h5py.File) -> data_dict_t:
                     models_dict[name].models.append(model_instance)
 
     except Exception as e:
-        alert(f"Unable to parse file. {e}")
+        if str(e) != IGNORE_ERROR: alert(f"Unable to parse file. {e}")
 
     return models_dict

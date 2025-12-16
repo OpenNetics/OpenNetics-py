@@ -16,7 +16,7 @@ def get_data() -> List[numeric_t]:
     return Result
 
 
-def send_data() -> None:
+def send_data(data: Any) -> None:
     # if fail
     try:
         pass
