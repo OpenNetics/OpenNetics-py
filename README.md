@@ -1,15 +1,16 @@
-# redwrenlib
+# opennetics-edge lib
 
-redwrenlib is a Python library crafted for the RedWren ecosystem, enabling developers to control and
-extend the functionality of their hardware with ease. Designed to offer an interactive interface,
-this library empowers users to build customised applications tailored to their unique needs.
+This repository is a Python library crafted for the OpenNetics edge server development, enabling
+developers to control and extend the functionality of their hardware with ease. Designed to offer an
+interactive interface, this library empowers users to build customised applications tailored to
+their unique needs.
 
 ## Installation
 
-To install redwrenlib, use the following command:
+To install the library, use the following command:
 
 ```bash
-pip install redwrenlib
+pip install opennetics-edge
 ```
 
 ## Development Status
@@ -18,3 +19,4 @@ This library is currently under development. If you try it out and encounter any
 submit them on this repository's issues page.
 
 For any feedback or contributions, feel free to reach out!
+

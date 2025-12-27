@@ -46,7 +46,7 @@ def alert(prompt: Any = "", backtrack: int = 1, level: AlertLevel = AlertLevel.A
             cur = os.path.dirname(start_path)
 
             while True:
-                candidate = os.path.join(cur, "redwrenlib")
+                candidate = os.path.join(cur, "opennetics-edge")
                 if os.path.exists(candidate):
                     return cur
 
