@@ -46,3 +46,4 @@ def read_file(f: h5py.File) -> data_dict_t:
         if str(e) != IGNORE_ERROR: alert(f"Unable to parse file. {e}")
 
     return models_dict
+
