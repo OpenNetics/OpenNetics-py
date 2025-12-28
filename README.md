@@ -1,17 +1,25 @@
-# opennetics-edge lib
 
-This repository is a Python library crafted for the OpenNetics edge server development, enabling
-developers to control and extend the functionality of their hardware with ease. Designed to offer an
-interactive interface, this library empowers users to build customised applications tailored to
-their unique needs.
+# OpenNetics Lib
 
-## Installation
+Python library made for the OpenNetics edge server development, to control and extend the
+functionality of OpenNetics hardware with ease. Designed to offer an interactive interface.
+
+
+## Installation & Usage
 
 To install the library, use the following command:
 
 ```bash
-pip install opennetics-edge
+pip install opennetics
 ```
+
+Then import in server code with-
+```py
+import opennetics as on
+```
+
+### Find library documentation at: [link](https://github.com/OpenNetics/OpenNetics-py/wiki)
+
 
 ## Development Status
 
