@@ -184,14 +184,14 @@ class GestureFile:
                 #========================================
                 # batchsize
                 #========================================
-                saved_batchsize = f['batchsize'][()].decode('utf-8')
+                saved_batchsize = f['batchsize'][()]
                 # save bigger value as _batchsize
                 if saved_batchsize > self._batchsize: self._batchsize = saved_batchsize
 
                 #========================================
                 # file_version
                 #========================================
-                file_version = f['version'][()].decode('utf-8')
+                file_version = f['version'][()]
                 print(f"file version = {file_version}")
 
                 if file_version in version_readers:
@@ -211,7 +211,7 @@ class GestureFile:
 
 
     # Check if the readings trigger the gesture
-    def has_gesture(self,
+    def is_gesture(self,
         timestamps: list[float], readings: dict[str, list[float]]
     ) -> tuple[bool, dict[str, GestureMatch]]:
         Result: dict[str, GestureMatch] = {}
