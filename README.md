@@ -1,9 +1,7 @@
-
 # OpenNetics Lib
 
 Python library made for the OpenNetics edge server development, to control and extend the
 functionality of OpenNetics hardware with ease. Designed to offer an interactive interface.
-
 
 ## Installation & Usage
 
@@ -14,12 +12,12 @@ pip install opennetics
 ```
 
 Then import in server code with-
+
 ```py
 import opennetics as on
 ```
 
 ### Find library documentation at: [link](https://github.com/OpenNetics/OpenNetics-py/wiki)
-
 
 ## Development Status
 
