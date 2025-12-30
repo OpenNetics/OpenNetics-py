@@ -6,12 +6,13 @@
 import threading
 from dataclasses import dataclass
 from time import sleep
-from typing import Any, Callable
+from typing import Any, Callable, Final
 
 from .input_data import InputData
 from .communication import get_data, connect, send_data
 from ..typing import numeric_t
 from ..file import GestureFile
+from ..utils.defaults import READ_INTERVAL_DEFAULT, WRITE_INTERVAL_DEFAULT
 from ..utils.debug import alert, AlertLevel
 
 
@@ -25,9 +26,10 @@ class GestureRecord:
     input_index: int
     running: bool = False
 
-INPUT_ONLY = 0
-OUTPUT_ONLY = 1
-INPUT_OUTPUT = 2
+
+INPUT_ONLY: Final[int] = 1
+OUTPUT_ONLY: Final[int] = 2
+INPUT_OUTPUT: Final[int] = 0
 
 
 #- Node Class --------------------------------------------------------------------------------------
@@ -42,8 +44,8 @@ class Node:
         self._write_buffer: dict[int, Any] = {}         # commands to write back to the node
 
         self._reading_loop: bool = False                # control reading process loop
-        self._read_interval: numeric_t = 1              # pause duration in reading process loop
-        self._write_interval: numeric_t = 1             # interval between two subsequent writes
+        self._read_interval: numeric_t = READ_INTERVAL_DEFAULT   # pause duration: read process loop
+        self._write_interval: numeric_t = WRITE_INTERVAL_DEFAULT # interval between two writes
 
 
     #- Getter/Setter -------------------------------------------------------------------------------
